@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      
+      if (code) {
+        // 1. Try custom scheme redirect
+        window.location.href = `fieldframe://oauth2redirect?code=${code}`;
+        
+        // 2. Fallback to App Links after 1 second
+        setTimeout(() => {
+          window.location.href = `https://fieldfram.github.io/fieldframe-redirect/app-link?code=${code}`;
+        }, 1000);
+      } else {
+        document.body.innerText = "Missing authorization code!";
+      }
+    </script>
+  </head>
+  <body>Redirecting to app...</body>
+</html>
