@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>OAuth2 Redirect</title>
-</head>
-<body>
-  <h2>OAuth2 Redirect Page</h2>
-  <p>If you see this page, authentication succeeded and you may close this tab.</p>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log("Authorization Code:", urlParams.get("code"));
-  </script>
-</body>
+  <head>
+    <script>
+      // Extract ?code=XYZ123 from the URL
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      if (code) {
+        // Redirect to your app's deep link
+        window.location.href = `fieldframe://oauth2redirect?code=${code}`;
+      } else {
+        document.body.innerText = "Missing authorization code!";
+      }
+    </script>
+  </head>
+  <body>
+    Redirecting to app...
+  </body>
 </html>
